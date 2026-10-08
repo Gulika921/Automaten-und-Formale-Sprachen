@@ -14,6 +14,11 @@ public class WortImpl implements Wort {
     }
 
     @Override
+    public int hashCode() {
+        return wort.hashCode();
+    }
+
+    @Override
     public String toString() {
         return wort;
     }
@@ -31,7 +36,7 @@ public class WortImpl implements Wort {
 
     @Override
     public Wort concat(Wort w) {
-        return new WortImpl(wort.concat(w.toString()));
+        return new WortImpl(wort + w);
     }
 
     @Override
@@ -48,7 +53,16 @@ public class WortImpl implements Wort {
 
     @Override
     public Wort tausche(char c1, char c2) {
-        return new WortImpl(wort.replace(c1, c2));
+        String result = "";
+
+        for (int i = 0; i < wort.length(); i++) {
+            if (c1 == wort.charAt(i)) {
+                result += c2;
+            } else {
+                result += wort.charAt(i);
+            }
+        }
+        return new WortImpl(result);
     }
 
     @Override
@@ -59,7 +73,7 @@ public class WortImpl implements Wort {
 
     @Override
     public Wort teilwort(int start, int laenge) {
-        if (start < 1) {
+        if (start < 1 || laenge < 0) {
             return null;
         }
 
@@ -74,9 +88,15 @@ public class WortImpl implements Wort {
 
     @Override
     public Wort ersetze(Wort w1, Wort w2) {
-        String strW1 = w1.toString();
-        String strW2 = w2.toString();
-        return new WortImpl(wort.replace(strW1, strW2));
+        String strWort1 = w1.toString();
+        String strWort2 = w2.toString();
+        int charactersToReplaceIndex = wort.indexOf(strWort1);
+        int charactersToSkip = charactersToReplaceIndex + strWort1.length();
+        if (charactersToReplaceIndex > -1) {
+            return new WortImpl(wort.substring(0, charactersToReplaceIndex) + strWort2 + wort.substring(charactersToSkip));
+        }
+
+        return new WortImpl(wort);
     }
 }
 
