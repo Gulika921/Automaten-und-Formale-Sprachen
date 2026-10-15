@@ -10,7 +10,7 @@ public class Blatt_2_RegexTest {
 	@Test
 	public void testGleitkommazahlen() {
 
-		String gleitkomma = "([+-]?(0|[1-9]\\d*)([eE]\\d+)?(\\.\\d+([eE]\\d+)?)?)";  // Hier Ihren regulŠren Ausdruck eintragen
+		String gleitkomma = "([+-]?(0|[1-9]\\d*))(\\.\\d+)?([eE][+-]?(0|[1-9]\\d*))?";  // Hier Ihren regulären Ausdruck eintragen
 
 		assertTrue(Pattern.matches(gleitkomma, "22"));
 		assertTrue(Pattern.matches(gleitkomma, "+2"));
@@ -46,7 +46,7 @@ public class Blatt_2_RegexTest {
 	@Test
 	public void testZeitpunkt() {
 
-		String zeitpunkt = "\\d{4}-(0[1-9]|1[1,2])-(0[1-9]|[12][0-9]|3[0-1])T([01]?[0-9]|2[0-3]):(0[0-9]|[1-5][0-9]):(0[0-9]|[1-5][0-9]):([0-9][0-9][0-9])"; // Hier Ihren regulŠren Ausdruck eintragen
+		String zeitpunkt = "\\d{4}-(0[1-9]|1[12])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]):\\d{3}"; // Hier Ihren regulŠren Ausdruck eintragen
 
 		assertTrue(Pattern.matches(zeitpunkt, "2012-09-30T23:28:51:544"));
 		assertTrue(Pattern.matches(zeitpunkt, "2012-12-30T12:28:51:544"));
@@ -70,7 +70,7 @@ public class Blatt_2_RegexTest {
 	@Test
 	public void testKFZKennzeichen() {
 
-		String kennzeichen = ""; // Hier Ihren regulŠren Ausdruck eintragen
+		String kennzeichen = "[A-ZÖÜÄ]{1,3} [A-Z]{1,2} ([1-9]\\d{0,3})( [HE])?"; // Hier Ihren regulären Ausdruck eintragen
 
 		assertTrue(Pattern.matches(kennzeichen, "VS HH 1000"));
 		assertTrue(Pattern.matches(kennzeichen, "HH HH 1"));
